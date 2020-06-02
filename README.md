@@ -1,0 +1,2 @@
+# module
+LotusEngine module skeleton
