@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "parameters": {
+    "minimum": {
+      "type": "number",
+      "required": false
+    },
+    "maximum": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "errors": {
+    "INVALID_NUMBER": "The provided entry is not a number",
+    "NUMBER_TOO_SMALL": "The provided number is too small",
+    "NUMBER_TOO_LARGE": "The provided number is too large"
+  }
+}

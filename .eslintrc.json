@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  }
+}
