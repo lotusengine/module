@@ -3,43 +3,36 @@ module.exports = function (options, payload) {
   // Options contains all the options passed to the module
   const { minimum, maximum } = options
 
+  // Keep track of errors
+  const errors = []
+
   // Check if a number
   if (isNaN(payload)) {
-    // Return an error object.
-    return {
-      // Errors should always return this status
-      status: 'error',
+    errors.push({
       // Must contain a CONSTANT_CASE error code
       code: 'INVALID_NUMBER',
-      // Should contain a friendly error message
-      message: 'Payload is not a valid number'
-
+      data: {} // Optional information to return - none in this case - shown for example
+    })
+    // Failed completely so we can just append to errors and return
+    return {
+      errors,
+      result: {} // We could return partial results - none in this case - shown for example
     }
   }
-
-  // Check min
+  // Check min and max
   if (minimum && payload < minimum) {
-    return {
-      status: 'error',
-      code: 'NUMBER_TOO_SMALL',
-      message: 'The provided number is too small'
-    }
+    errors.push({ code: 'NUMBER_TOO_SMALL' })
+  } else if (maximum && payload > maximum) {
+    errors.push({ code: 'NUMBER_TOO_LARGE' })
   }
 
-  // Check max
-  if (maximum && payload > maximum) {
-    return {
-      status: 'error',
-      code: 'NUMBER_TOO_LARGE',
-      message: 'The provided number is too large'
-    }
+  // Check even - this can fail even if out of range above
+  if (payload % 2 !== 0) {
+    errors.push({ code: 'NUMBER_NOT_EVEN' })
   }
 
-  // We have valid number of the right range so let's return a success message
+  // Return with any errors - if errors array is empty the function is successful
   return {
-    // Success object should always return this status
-    status: 'success',
-    // Optionally a data object can be returned - nothing is needed in our case
-    data: {}
+    errors
   }
 }

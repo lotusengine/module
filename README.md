@@ -4,7 +4,7 @@
 
 Skeleton sample code to create a LotusEngine NodeJS module
 
-This contrived sample shows the creation of a module to check the validity of a number as well as it's range (min/max). The code exports a single function (defined as `main` in package.json) that accepts a `parameters` and `payload` options.
+This contrived sample shows the creation of a module to check the validity of a number as well as it's range (min/max) and also ensure it's an even number. The code exports a single function (defined as `main` in package.json) that accepts a `parameters` and `payload` options.
 
 ## Input fields
 
@@ -20,24 +20,27 @@ The payload field can be anything - sring, object, etc. The function should not 
 
 ## Output
 
-The function should only export two kinds of objects. Each error code as well should be defined in the configuration file.
+The function should return any errors that may have occurred as well as a result objct if relevant. It is possible for a function to return multiple error codes as well as a partial result object depending on needs. For example a function may accept a list of customers to update - we would want to know each time an error occurred as well as return a list of result for the success calls.
 
-### Error response
+### Example response
 
 ```
 {
-  status: 'error',
-  code: 'SOME_CONSTANT_CASE_CODE',
-  message: 'Optional but desired explanation of error'
+  errors: [{
+    code: 'SOME_CONSTANT_CASE_CODE'
+    data: {} // Optional - can be return to provide information relevant to error
+  },  {
+    code: 'SOME_OTHER_CODE'
+  }],
+  result: {} // Can be ommitted if no data needs to be returned
 }
 ```
 
-### Success response
+If the functiion just returns without data it is equivalent to:
 
-```
-{
-  status: 'success',
-  data: {} // Optional data to return
+````
+  errors: [],
+  results: {}
 ```
 
 ## Bundling, NodeJS version, etc
@@ -55,3 +58,4 @@ The configuration file also accepts an `author`, `url`, `version`, `name` and `d
 ## Testing
 
 All modules should contain unit tests but this is not enforced. We use Jest for community modules but authors of private modules are free to use their preferred runner.
+````
