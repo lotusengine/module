@@ -15,5 +15,6 @@
     "NUMBER_TOO_SMALL": "The provided number is too small",
     "NUMBER_TOO_LARGE": "The provided number is too large",
     "NUMBER_NOT_EVEN": "The provided number is not an even number"
-  }
+  },
+  "result": ["null"]
 }
