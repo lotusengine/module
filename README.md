@@ -40,7 +40,7 @@ If the functiion just returns without data it is equivalent to:
 
 ````
   errors: [],
-  results: {}
+  result: null // Format return depends on function - array, object literal, string, etc
 ```
 
 ## Bundling, NodeJS version, etc
